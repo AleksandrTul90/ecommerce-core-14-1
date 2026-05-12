@@ -22,4 +22,10 @@ poetry run flake8 src tests main.py
 
 ## GitFlow
 
-Работа ведётся в feature-ветке от `develop`, сдача — ссылкой на **pull request** в основную ветку согласно требованиям курса.
+Рекомендуемый порядок перед сдачей:
+
+1. Создать ветку `develop` от `main` (если её ещё нет в удалённом репозитории):  
+   `git checkout -b develop` и запушить.
+2. От `develop` создать feature-ветку, например `feature/14.1-oop-intro`.
+3. После коммитов открыть **pull request** из feature-ветки в `develop` (или по инструкции наставника).
+
