@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "ecommerce-core"
+version = "0.1.0"
+description = "Ядро интернет-магазина: сущности Product и Category (ДЗ 14.1)."
+authors = ["Student"]
+readme = "README.md"
+packages = [{ include = "shop", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+pytest-cov = "^5.0.0"
+flake8 = "^7.0.0"
+black = "^24.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "--cov=shop --cov-report=term-missing --cov-report=html --cov-fail-under=75"
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+fail_under = 75
+show_missing = true
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]

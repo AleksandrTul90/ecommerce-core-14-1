@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Смартфоны",
+    "description": "Мобильные телефоны и аксессуары",
+    "products": [
+      {
+        "name": "Samsung Galaxy S23 Ultra",
+        "description": "256 ГБ, флагманская камера",
+        "price": 120000.0,
+        "quantity": 3
+      },
+      {
+        "name": "Google Pixel 8",
+        "description": "Чистый Android, компактный корпус",
+        "price": 75000.0,
+        "quantity": 7
+      }
+    ]
+  },
+  {
+    "name": "Ноутбуки",
+    "description": "Портативные компьютеры",
+    "products": [
+      {
+        "name": "ThinkPad X1",
+        "description": "14\", бизнес-класс",
+        "price": 150000.0,
+        "quantity": 2
+      }
+    ]
+  }
+]
