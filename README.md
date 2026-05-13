@@ -29,3 +29,6 @@ poetry run flake8 src tests main.py
 2. От `develop` создать feature-ветку, например `feature/14.1-oop-intro`.
 3. После коммитов открыть **pull request** из feature-ветки в `develop` (или по инструкции наставника).
 
+## Сдача
+
+Репозиторий: https://github.com/AleksandrTul90/ecommerce-core-14-1
