@@ -4,7 +4,6 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .coverage
-htmlcov/
 dist/
 *.egg-info/
 .mypy_cache/
