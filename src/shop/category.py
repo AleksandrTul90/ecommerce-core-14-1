@@ -20,6 +20,22 @@ class Category:
     ) -> None:
         self.name = name
         self.description = description
-        self.products = list(products)
+        self.__products: list[Product] = list(products)
         type(self).category_count += 1
-        type(self).product_count += len(self.products)
+        type(self).product_count += len(self.__products)
+
+    def add_product(self, product: Product) -> None:
+        """Добавляет товар в приватный список категории."""
+        self.__products.append(product)
+        type(self).product_count += 1
+
+    @property
+    def products(self) -> str:
+        """Возвращает строку со всеми товарами категории."""
+        result = ""
+        for product in self.__products:
+            result += (
+                f"{product.name}, {product.price} руб. "
+                f"Остаток: {product.quantity} шт.\n"
+            )
+        return result

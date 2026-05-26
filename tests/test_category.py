@@ -15,9 +15,10 @@ def test_category_initialization() -> None:
     )
     assert category.name == "Электроника"
     assert category.description == "Гаджеты"
-    assert len(category.products) == 2
-    assert category.products[0] is p1
-    assert category.products[1] is p2
+    assert category.products == (
+        "A, 1.0 руб. Остаток: 1 шт.\nB, 2.0 руб. Остаток: 2 шт.\n"
+    )
+    assert Category.product_count == 2
 
 
 def test_category_count_increments() -> None:
@@ -47,7 +48,21 @@ def test_category_products_is_copied() -> None:
     shared: list[Product] = []
     category = Category("name", "desc", shared)
     shared.append(Product("p", "d", 1.0, 1))
-    assert len(category.products) == 0
+    assert category.products == ""
+
+
+def test_add_product_appends_and_increments_counter() -> None:
+    category = Category("Тест", "Описание", [])
+    product = Product("Товар", "Описание товара", 100.0, 3)
+    category.add_product(product)
+    assert category.products == "Товар, 100.0 руб. Остаток: 3 шт.\n"
+    assert Category.product_count == 1
+
+
+def test_products_property_format() -> None:
+    product = Product("Книга", "Учебник", 1500.0, 10)
+    category = Category("Книги", "Печатные издания", [product])
+    assert category.products == "Книга, 1500.0 руб. Остаток: 10 шт.\n"
 
 
 def test_load_categories_from_json() -> None:
@@ -55,7 +70,7 @@ def test_load_categories_from_json() -> None:
     categories = load_categories_from_json(path)
     assert len(categories) == 2
     assert categories[0].name == "Смартфоны"
-    assert len(categories[0].products) == 2
-    assert categories[0].products[0].name == "Samsung Galaxy S23 Ultra"
+    assert "Samsung Galaxy S23 Ultra" in categories[0].products
+    assert categories[0].products.count("шт.") == 2
     assert categories[1].name == "Ноутбуки"
-    assert len(categories[1].products) == 1
+    assert categories[1].products.count("шт.") == 1

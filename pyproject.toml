@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ecommerce-core"
 version = "0.1.0"
-description = "Ядро интернет-магазина: сущности Product и Category (ДЗ 14.1)."
+description = "Ядро интернет-магазина: режимы доступа Product и Category (ДЗ 14.2)."
 authors = ["Student"]
 readme = "README.md"
 packages = [{ include = "shop", from = "src" }]
@@ -22,7 +22,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-addopts = "--cov=shop --cov-report=term-missing --cov-report=html --cov-fail-under=75"
+addopts = "--cov=shop --cov-report=term-missing --cov-report=html --cov-report=xml:coverage.xml --cov-fail-under=75"
 
 [tool.coverage.run]
 source = ["src"]
