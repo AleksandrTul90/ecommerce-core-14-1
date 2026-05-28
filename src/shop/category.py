@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from shop.product import Product
+from shop.product import Product
 
 
 class Category:
@@ -26,6 +23,8 @@ class Category:
 
     def add_product(self, product: Product) -> None:
         """Добавляет товар в приватный список категории."""
+        if not isinstance(product, Product):
+            raise TypeError("Можно добавлять только объекты Product или его наследников")
         self.__products.append(product)
         type(self).product_count += 1
 

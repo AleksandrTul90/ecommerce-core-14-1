@@ -1,6 +1,6 @@
 import pytest
 
-from shop.product import Product
+from shop.product import LawnGrass, Product, Smartphone
 
 
 def test_product_initialization() -> None:
@@ -118,3 +118,67 @@ def test_product_add_non_product_raises_type_error() -> None:
     product = Product("Товар", "Описание", 100.0, 1)
     with pytest.raises(TypeError):
         _ = product + 10
+
+
+def test_smartphone_initialization() -> None:
+    smartphone = Smartphone(
+        name="Iphone 15",
+        description="512GB, Gray space",
+        price=210000.0,
+        quantity=8,
+        efficiency=98.2,
+        model="15",
+        memory=512,
+        color="Gray space",
+    )
+    assert smartphone.name == "Iphone 15"
+    assert smartphone.description == "512GB, Gray space"
+    assert smartphone.price == 210000.0
+    assert smartphone.quantity == 8
+    assert smartphone.efficiency == 98.2
+    assert smartphone.model == "15"
+    assert smartphone.memory == 512
+    assert smartphone.color == "Gray space"
+
+
+def test_lawn_grass_initialization() -> None:
+    grass = LawnGrass(
+        name="Газонная трава",
+        description="Элитная трава для газона",
+        price=500.0,
+        quantity=20,
+        country="Россия",
+        germination_period="7 дней",
+        color="Зеленый",
+    )
+    assert grass.name == "Газонная трава"
+    assert grass.description == "Элитная трава для газона"
+    assert grass.price == 500.0
+    assert grass.quantity == 20
+    assert grass.country == "Россия"
+    assert grass.germination_period == "7 дней"
+    assert grass.color == "Зеленый"
+
+
+def test_add_different_product_classes_raises_type_error() -> None:
+    smartphone = Smartphone(
+        name="Iphone 15",
+        description="512GB, Gray space",
+        price=210000.0,
+        quantity=8,
+        efficiency=98.2,
+        model="15",
+        memory=512,
+        color="Gray space",
+    )
+    grass = LawnGrass(
+        name="Газонная трава",
+        description="Элитная трава для газона",
+        price=500.0,
+        quantity=20,
+        country="Россия",
+        germination_period="7 дней",
+        color="Зеленый",
+    )
+    with pytest.raises(TypeError):
+        _ = smartphone + grass
