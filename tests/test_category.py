@@ -65,6 +65,18 @@ def test_products_property_format() -> None:
     assert category.products == "Книга, 1500.0 руб. Остаток: 10 шт.\n"
 
 
+def test_category_str_shows_total_quantity() -> None:
+    category = Category(
+        "Смартфоны",
+        "Телефоны",
+        [
+            Product("A", "da", 100.0, 5),
+            Product("B", "db", 200.0, 7),
+        ],
+    )
+    assert str(category) == "Смартфоны, количество продуктов: 12 шт."
+
+
 def test_load_categories_from_json() -> None:
     path = Path(__file__).resolve().parents[1] / "data" / "products.json"
     categories = load_categories_from_json(path)

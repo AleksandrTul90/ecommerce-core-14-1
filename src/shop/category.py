@@ -29,13 +29,11 @@ class Category:
         self.__products.append(product)
         type(self).product_count += 1
 
+    def __str__(self) -> str:
+        total_quantity = sum(product.quantity for product in self.__products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
+
     @property
     def products(self) -> str:
         """Возвращает строку со всеми товарами категории."""
-        result = ""
-        for product in self.__products:
-            result += (
-                f"{product.name}, {product.price} руб. "
-                f"Остаток: {product.quantity} шт.\n"
-            )
-        return result
+        return "".join(f"{product}\n" for product in self.__products)

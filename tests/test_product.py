@@ -101,3 +101,20 @@ def test_new_product_merge_keeps_higher_price() -> None:
     )
     assert existing.price == 200.0
     assert existing.quantity == 2
+
+
+def test_product_str_representation() -> None:
+    product = Product("Книга", "Учебник по Python", 1500.0, 10)
+    assert str(product) == "Книга, 1500.0 руб. Остаток: 10 шт."
+
+
+def test_product_add_returns_total_stock_value() -> None:
+    product_a = Product("Товар A", "Описание A", 100.0, 10)
+    product_b = Product("Товар B", "Описание B", 200.0, 2)
+    assert product_a + product_b == 1400.0
+
+
+def test_product_add_non_product_raises_type_error() -> None:
+    product = Product("Товар", "Описание", 100.0, 1)
+    with pytest.raises(TypeError):
+        _ = product + 10
