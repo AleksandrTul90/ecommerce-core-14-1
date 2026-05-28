@@ -22,6 +22,8 @@ class Product:
     def __add__(self, other: object) -> float:
         if not isinstance(other, Product):
             return NotImplemented
+        if type(self) is not type(other):
+            raise TypeError("Можно складывать только продукты одного типа")
         return (self.price * self.quantity) + (other.price * other.quantity)
 
     @property
@@ -67,3 +69,43 @@ class Product:
             price=price,
             quantity=quantity,
         )
+
+
+class Smartphone(Product):
+    """Товар-смартфон."""
+
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        efficiency: float,
+        model: str,
+        memory: int,
+        color: str,
+    ) -> None:
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+
+class LawnGrass(Product):
+    """Товар из категории газонной травы."""
+
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: str,
+        color: str,
+    ) -> None:
+        super().__init__(name, description, price, quantity)
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color

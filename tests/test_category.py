@@ -3,6 +3,7 @@ from pathlib import Path
 from shop.category import Category
 from shop.json_loader import load_categories_from_json
 from shop.product import Product
+import pytest
 
 
 def test_category_initialization() -> None:
@@ -57,6 +58,12 @@ def test_add_product_appends_and_increments_counter() -> None:
     category.add_product(product)
     assert category.products == "Товар, 100.0 руб. Остаток: 3 шт.\n"
     assert Category.product_count == 1
+
+
+def test_add_product_rejects_non_product() -> None:
+    category = Category("Тест", "Описание", [])
+    with pytest.raises(TypeError):
+        category.add_product("not a product")
 
 
 def test_products_property_format() -> None:
