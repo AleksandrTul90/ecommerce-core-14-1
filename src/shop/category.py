@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from shop.base_entity import BaseEntity
 from shop.product import Product
 
 
-class Category:
+class Category(BaseEntity):
     """Категория товаров."""
 
     category_count: int = 0
@@ -15,16 +16,22 @@ class Category:
         description: str,
         products: list[Product],
     ) -> None:
-        self.name = name
+        self._name = name
         self.description = description
         self.__products: list[Product] = list(products)
         type(self).category_count += 1
         type(self).product_count += len(self.__products)
 
+    @property
+    def name(self) -> str:
+        return self._name
+
     def add_product(self, product: Product) -> None:
         """Добавляет товар в приватный список категории."""
         if not isinstance(product, Product):
-            raise TypeError("Можно добавлять только объекты Product или его наследников")
+            raise TypeError(
+                "Можно добавлять только объекты Product или его наследников"
+            )
         self.__products.append(product)
         type(self).product_count += 1
 

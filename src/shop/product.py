@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+from shop.base_product import BaseProduct
+from shop.print_creation_mixin import PrintCreationMixin
 
-class Product:
+
+class Product(PrintCreationMixin, BaseProduct):
     """Товар интернет-магазина."""
 
     def __init__(
@@ -15,6 +18,14 @@ class Product:
         self.description = description
         self.quantity = quantity
         self.__price = price
+        super().__init__()
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}("
+            f"{self.name!r}, {self.description!r}, "
+            f"{self.price}, {self.quantity})"
+        )
 
     def __str__(self) -> str:
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
@@ -42,6 +53,20 @@ class Product:
             if answer.strip().lower() != "y":
                 return
         self.__price = value
+
+    def check_change_price(self, new_price: float) -> float | None:
+        """Изменение цены с подтверждением пользователя."""
+        if self.price == new_price:
+            return self.price
+        user_confirmed = input(
+            "Вы уверены, что хотите изменить цену? (y/n):"
+        )
+        if user_confirmed.lower() == "y":
+            self.price = new_price
+            return self.price
+        if user_confirmed.lower() == "n":
+            return self.price
+        return None
 
     @classmethod
     def new_product(
@@ -85,11 +110,19 @@ class Smartphone(Product):
         memory: int,
         color: str,
     ) -> None:
-        super().__init__(name, description, price, quantity)
         self.efficiency = efficiency
         self.model = model
         self.memory = memory
         self.color = color
+        super().__init__(name, description, price, quantity)
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}("
+            f"{self.name!r}, {self.description!r}, {self.price}, "
+            f"{self.quantity}, {self.efficiency}, {self.model!r}, "
+            f"{self.memory}, {self.color!r})"
+        )
 
 
 class LawnGrass(Product):
@@ -105,7 +138,15 @@ class LawnGrass(Product):
         germination_period: str,
         color: str,
     ) -> None:
-        super().__init__(name, description, price, quantity)
         self.country = country
         self.germination_period = germination_period
         self.color = color
+        super().__init__(name, description, price, quantity)
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}("
+            f"{self.name!r}, {self.description!r}, {self.price}, "
+            f"{self.quantity}, {self.country!r}, "
+            f"{self.germination_period!r}, {self.color!r})"
+        )
