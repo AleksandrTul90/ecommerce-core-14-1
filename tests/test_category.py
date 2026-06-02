@@ -93,3 +93,21 @@ def test_load_categories_from_json() -> None:
     assert categories[0].products.count("шт.") == 2
     assert categories[1].name == "Ноутбуки"
     assert categories[1].products.count("шт.") == 1
+
+
+def test_middle_price_returns_average_for_non_empty_category() -> None:
+    category = Category(
+        "Смартфоны",
+        "Телефоны",
+        [
+            Product("A", "da", 100.0, 5),
+            Product("B", "db", 200.0, 7),
+            Product("C", "dc", 300.0, 2),
+        ],
+    )
+    assert category.middle_price() == 200.0
+
+
+def test_middle_price_returns_zero_for_empty_category() -> None:
+    category = Category("Пустая", "Без товаров", [])
+    assert category.middle_price() == 0.0
