@@ -16,6 +16,17 @@ def test_product_initialization() -> None:
     assert product.quantity == 10
 
 
+def test_product_initialization_raises_on_zero_quantity() -> None:
+    with pytest.raises(ValueError) as exc_info:
+        Product(
+            name="Некорректный товар",
+            description="Нельзя создать",
+            price=100.0,
+            quantity=0,
+        )
+    assert str(exc_info.value) == "Товар с нулевым количеством не может быть добавлен"
+
+
 def test_new_product_from_dict() -> None:
     product = Product.new_product(
         {
